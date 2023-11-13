@@ -20,5 +20,3 @@ contract ERC721Factory {
     return deployedTokens;
   }
 }
-
-
