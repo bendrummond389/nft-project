@@ -7,7 +7,7 @@
 
 <div class="m-3">
   <h1 class="text-4xl font-bold mt-4">
-    Welcome to an Theta
+    Welcome to Theta
   </h1>
   <p class="mt-2 text-xl">Discover, collect, and sell extraordinary NFTs</p>
 

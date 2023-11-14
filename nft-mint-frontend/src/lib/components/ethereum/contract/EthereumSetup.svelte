@@ -1,26 +1,39 @@
 <script lang="ts">
-  import { Contract, ethers } from 'ethers'
+  import { Contract, ethers, type Provider } from 'ethers'
   import { onMount } from 'svelte'
   import { abi as ContractFactoryABI } from '$lib/contracts/ERC721Factory.json'
   import { contract } from '$lib/stores/contract'
   import { FactoryAddress } from '$lib/ethereum'
   import type { ERC721Factory } from '$lib/types/ERC721Factory'
+  import { walletAddress, ethProvider } from '$lib/stores/wallet'
 
   onMount(async () => {
-    let signer = null
-    let provider
     if (!window.ethereum) {
-      alert('Web3 not enabled, please install metamask')
+      alert('Please install MetaMask Before continuing: https://metamask.io/')
+    } else {
+      let provider = new ethers.BrowserProvider(window.ethereum)
+      setupEthereumListeners()
+      setProvider(provider)
+      setContract(provider)
     }
+  })
 
-    provider = new ethers.BrowserProvider(window.ethereum)
+  const setProvider = (provider: Provider) => {
+    ethProvider.set(provider)
+  }
+
+  const setContract = (provider: Provider) => {
     const contractInstance = new ethers.Contract(
       FactoryAddress,
       ContractFactoryABI,
       provider
     ) as unknown as ERC721Factory
-
     contract.set(contractInstance)
-    console.log('contract successfully set: ', contractInstance)
-  })
+  }
+
+  const setupEthereumListeners = () => {
+    window.ethereum.on('accountsChanged', (accounts) => {
+      walletAddress.set(accounts[0] || null)
+    })
+  }
 </script>

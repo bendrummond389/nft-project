@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-export const FactoryAddress = '0x9F08551dDb44fad00A061D6dF952BB6C8c75A2B7'
+export const FactoryAddress = '0x1432e5FD470429feB45B7CaD510CeB390fF9AbE1'
 
 export const fetchDeployedTokens = async (): Promise<
   ERC721Factory.TokenMetadataStruct[]

@@ -12,185 +12,195 @@ import type {
   ContractRunner,
   ContractMethod,
   Listener,
-} from 'ethers'
+} from "ethers";
 import type {
   TypedContractEvent,
   TypedDeferredTopicFilter,
   TypedEventLog,
   TypedListener,
   TypedContractMethod,
-} from './common'
+} from "../common";
 
 export declare namespace ERC721Factory {
   export type TokenMetadataStruct = {
-    tokenAddress: AddressLike
-    name: string
-    symbol: string
-    description: string
-  }
+    tokenAddress: AddressLike;
+    name: string;
+    symbol: string;
+    description: string;
+    owner: AddressLike;
+  };
 
   export type TokenMetadataStructOutput = [
     tokenAddress: string,
     name: string,
     symbol: string,
     description: string,
+    owner: string
   ] & {
-    tokenAddress: string
-    name: string
-    symbol: string
-    description: string
-  }
+    tokenAddress: string;
+    name: string;
+    symbol: string;
+    description: string;
+    owner: string;
+  };
 }
 
 export interface ERC721FactoryInterface extends Interface {
   getFunction(
     nameOrSignature:
-      | 'createToken'
-      | 'deployedTokens'
-      | 'getDeployedTokens'
-      | 'mintToken'
-  ): FunctionFragment
+      | "createToken"
+      | "deployedTokens"
+      | "getDeployedTokens"
+      | "mintToken"
+  ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: 'createToken',
+    functionFragment: "createToken",
     values: [string, string, string]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'deployedTokens',
+    functionFragment: "deployedTokens",
     values: [BigNumberish]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'getDeployedTokens',
+    functionFragment: "getDeployedTokens",
     values?: undefined
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'mintToken',
+    functionFragment: "mintToken",
     values: [BigNumberish, AddressLike, string]
-  ): string
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'createToken', data: BytesLike): Result
   decodeFunctionResult(
-    functionFragment: 'deployedTokens',
+    functionFragment: "createToken",
     data: BytesLike
-  ): Result
+  ): Result;
   decodeFunctionResult(
-    functionFragment: 'getDeployedTokens',
+    functionFragment: "deployedTokens",
     data: BytesLike
-  ): Result
-  decodeFunctionResult(functionFragment: 'mintToken', data: BytesLike): Result
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDeployedTokens",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "mintToken", data: BytesLike): Result;
 }
 
 export interface ERC721Factory extends BaseContract {
-  connect(runner?: ContractRunner | null): ERC721Factory
-  waitForDeployment(): Promise<this>
+  connect(runner?: ContractRunner | null): ERC721Factory;
+  waitForDeployment(): Promise<this>;
 
-  interface: ERC721FactoryInterface
+  interface: ERC721FactoryInterface;
 
   queryFilter<TCEvent extends TypedContractEvent>(
     event: TCEvent,
     fromBlockOrBlockhash?: string | number | undefined,
     toBlock?: string | number | undefined
-  ): Promise<Array<TypedEventLog<TCEvent>>>
+  ): Promise<Array<TypedEventLog<TCEvent>>>;
   queryFilter<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     fromBlockOrBlockhash?: string | number | undefined,
     toBlock?: string | number | undefined
-  ): Promise<Array<TypedEventLog<TCEvent>>>
+  ): Promise<Array<TypedEventLog<TCEvent>>>;
 
   on<TCEvent extends TypedContractEvent>(
     event: TCEvent,
     listener: TypedListener<TCEvent>
-  ): Promise<this>
+  ): Promise<this>;
   on<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
-  ): Promise<this>
+  ): Promise<this>;
 
   once<TCEvent extends TypedContractEvent>(
     event: TCEvent,
     listener: TypedListener<TCEvent>
-  ): Promise<this>
+  ): Promise<this>;
   once<TCEvent extends TypedContractEvent>(
     filter: TypedDeferredTopicFilter<TCEvent>,
     listener: TypedListener<TCEvent>
-  ): Promise<this>
+  ): Promise<this>;
 
   listeners<TCEvent extends TypedContractEvent>(
     event: TCEvent
-  ): Promise<Array<TypedListener<TCEvent>>>
-  listeners(eventName?: string): Promise<Array<Listener>>
+  ): Promise<Array<TypedListener<TCEvent>>>;
+  listeners(eventName?: string): Promise<Array<Listener>>;
   removeAllListeners<TCEvent extends TypedContractEvent>(
     event?: TCEvent
-  ): Promise<this>
+  ): Promise<this>;
 
   createToken: TypedContractMethod<
     [_name: string, _symbol: string, _description: string],
     [void],
-    'nonpayable'
-  >
+    "nonpayable"
+  >;
 
   deployedTokens: TypedContractMethod<
     [arg0: BigNumberish],
     [
-      [string, string, string, string] & {
-        tokenAddress: string
-        name: string
-        symbol: string
-        description: string
-      },
+      [string, string, string, string, string] & {
+        tokenAddress: string;
+        name: string;
+        symbol: string;
+        description: string;
+        owner: string;
+      }
     ],
-    'view'
-  >
+    "view"
+  >;
 
   getDeployedTokens: TypedContractMethod<
     [],
     [ERC721Factory.TokenMetadataStructOutput[]],
-    'view'
-  >
+    "view"
+  >;
 
   mintToken: TypedContractMethod<
     [index: BigNumberish, to: AddressLike, uri: string],
     [void],
-    'nonpayable'
-  >
+    "nonpayable"
+  >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
-  ): T
+  ): T;
 
   getFunction(
-    nameOrSignature: 'createToken'
+    nameOrSignature: "createToken"
   ): TypedContractMethod<
     [_name: string, _symbol: string, _description: string],
     [void],
-    'nonpayable'
-  >
-  getFunction(nameOrSignature: 'deployedTokens'): TypedContractMethod<
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "deployedTokens"
+  ): TypedContractMethod<
     [arg0: BigNumberish],
     [
-      [string, string, string, string] & {
-        tokenAddress: string
-        name: string
-        symbol: string
-        description: string
-      },
+      [string, string, string, string, string] & {
+        tokenAddress: string;
+        name: string;
+        symbol: string;
+        description: string;
+        owner: string;
+      }
     ],
-    'view'
-  >
+    "view"
+  >;
   getFunction(
-    nameOrSignature: 'getDeployedTokens'
+    nameOrSignature: "getDeployedTokens"
   ): TypedContractMethod<
     [],
     [ERC721Factory.TokenMetadataStructOutput[]],
-    'view'
-  >
+    "view"
+  >;
   getFunction(
-    nameOrSignature: 'mintToken'
+    nameOrSignature: "mintToken"
   ): TypedContractMethod<
     [index: BigNumberish, to: AddressLike, uri: string],
     [void],
-    'nonpayable'
-  >
+    "nonpayable"
+  >;
 
-  filters: {}
+  filters: {};
 }

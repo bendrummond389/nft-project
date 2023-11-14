@@ -19,6 +19,8 @@
   if (!window.ethereum) {
     alert("A wallet must be connected to view it's associated collections")
   } else {
+    
+
   }
 </script>
 
