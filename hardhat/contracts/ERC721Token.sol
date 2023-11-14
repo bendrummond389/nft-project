@@ -9,20 +9,32 @@ contract ERC721Token is ERC721, Ownable {
   using Strings for uint256;
 
   uint256 private _tokenIdCounter;
+  address private factoryAddress;
+
   mapping(uint256 => string) private _tokenURIs;
 
   constructor(
-    string memory name,
-    string memory symbol,
-    address initialOwner
-  ) ERC721(name, symbol) Ownable(initialOwner) {
+    string memory _name,
+    string memory _symbol,
+    address initialOwner,
+    address _factoryAddress
+  ) ERC721(_name, _symbol) Ownable(initialOwner) {
     _tokenIdCounter = 0;
+    factoryAddress = _factoryAddress;
+  }
+
+  modifier mintingAuthorized() {
+    require(
+      msg.sender == owner() || msg.sender == factoryAddress,
+      'Not authorized to mint'
+    );
+    _;
   }
 
   function mint(
     address to,
     string memory uri
-  ) public onlyOwner returns (uint256) {
+  ) public mintingAuthorized returns (uint256) {
     _tokenIdCounter += 1;
     uint256 newItemId = _tokenIdCounter;
     _mint(to, newItemId);

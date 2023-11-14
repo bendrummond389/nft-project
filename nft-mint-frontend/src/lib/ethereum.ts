@@ -6,4 +6,4 @@ declare global {
   }
 }
 
-export const FactoryAddress = '0xc9CCc8Cd69579596f376F339c31ED17A9dFd42f3'
+export const FactoryAddress = '0x9F08551dDb44fad00A061D6dF952BB6C8c75A2B7'

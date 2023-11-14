@@ -6,12 +6,19 @@ describe('ERC721Token', function () {
   let token: ERC721Token
   let owner: any
   let addr1: any
+  let dummyFactoryAddress: string
 
   this.beforeEach(async function () {
     ;[owner, addr1] = await ethers.getSigners()
+    dummyFactoryAddress = ethers.Wallet.createRandom().address
 
     const Token = await ethers.getContractFactory('ERC721Token')
-    token = (await Token.deploy('TestToken', 'TTK')) as ERC721Token
+    token = (await Token.deploy(
+      'TestToken',
+      'TTK',
+      owner.address,
+      dummyFactoryAddress
+    )) as ERC721Token
     token.waitForDeployment()
   })
 

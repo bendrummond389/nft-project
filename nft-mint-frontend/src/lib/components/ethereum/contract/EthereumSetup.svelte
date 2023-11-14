@@ -4,6 +4,7 @@
   import { abi as ContractFactoryABI } from '$lib/contracts/ERC721Factory.json'
   import { contract } from '$lib/stores/contract'
   import { FactoryAddress } from '$lib/ethereum'
+  import type { ERC721Factory } from '$lib/types/ERC721Factory'
 
   onMount(async () => {
     let signer = null
@@ -17,7 +18,7 @@
       FactoryAddress,
       ContractFactoryABI,
       provider
-    )
+    ) as unknown as ERC721Factory
 
     contract.set(contractInstance)
     console.log('contract successfully set: ', contractInstance)

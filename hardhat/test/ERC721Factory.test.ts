@@ -16,11 +16,11 @@ describe('ERC721Factory', function () {
 
   describe('Token Creation', function () {
     it('should create a new ERC721 token', async function () {
-      await factory.createToken('NewToken', 'NTK')
+      await factory.createToken('NewToken', 'NTK', 'a very new token')
       const deployedTokens = await factory.getDeployedTokens()
       expect(deployedTokens.length).to.equal(1)
 
-      const tokenAddress = deployedTokens[0]
+      const tokenAddress = deployedTokens[0].tokenAddress
       const token = (await ethers.getContractAt(
         'ERC721Token',
         tokenAddress

@@ -4,21 +4,45 @@ pragma solidity 0.8.20;
 import './ERC721Token.sol';
 
 contract ERC721Factory {
-  ERC721Token[] public deployedTokens;
+  struct TokenMetadata {
+    address tokenAddress;
+    string name;
+    string symbol;
+    string description;
+  }
 
-  function createToken(string memory name, string memory symbol) public {
-    ERC721Token newToken = new ERC721Token(name, symbol, msg.sender);
-    deployedTokens.push(newToken);
+  TokenMetadata[] public deployedTokens;
+
+  function createToken(
+    string memory _name,
+    string memory _symbol,
+    string memory _description
+  ) public {
+    ERC721Token newToken = new ERC721Token(
+      _name,
+      _symbol,
+      msg.sender,
+      address(this)
+    );
+
+    deployedTokens.push(
+      TokenMetadata(address(newToken), _name, _symbol, _description)
+    );
   }
 
   function mintToken(uint256 index, address to, string memory uri) public {
-    ERC721Token token = deployedTokens[index];
+    TokenMetadata storage metadata = deployedTokens[index];
+    ERC721Token token = ERC721Token(metadata.tokenAddress);
 
-    require(msg.sender == token.owner(), "Only the token owner can mint tokens");
+    require(
+      msg.sender == token.owner(),
+      'Only the token owner can mint tokens'
+    );
+
     token.mint(to, uri);
   }
 
-  function getDeployedTokens() public view returns (ERC721Token[] memory) {
+  function getDeployedTokens() public view returns (TokenMetadata[] memory) {
     return deployedTokens;
   }
 }
