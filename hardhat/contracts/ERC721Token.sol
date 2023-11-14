@@ -2,19 +2,27 @@
 pragma solidity 0.8.20;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
+import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/Strings.sol';
 
-contract ERC721Token is ERC721 {
+contract ERC721Token is ERC721, Ownable {
   using Strings for uint256;
 
   uint256 private _tokenIdCounter;
   mapping(uint256 => string) private _tokenURIs;
 
-  constructor(string memory name, string memory symbol) ERC721(name, symbol) {
+  constructor(
+    string memory name,
+    string memory symbol,
+    address initialOwner
+  ) ERC721(name, symbol) Ownable(initialOwner) {
     _tokenIdCounter = 0;
   }
 
-  function mint(address to, string memory uri) public returns (uint256) {
+  function mint(
+    address to,
+    string memory uri
+  ) public onlyOwner returns (uint256) {
     _tokenIdCounter += 1;
     uint256 newItemId = _tokenIdCounter;
     _mint(to, newItemId);

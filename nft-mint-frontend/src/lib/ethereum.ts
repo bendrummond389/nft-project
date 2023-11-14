@@ -1,31 +1,9 @@
-import { ethers } from 'ethers'
-import type { Contract } from 'ethers'
-import type { MetaMaskInpageProvider } from '@metamask/providers'
-import { abi as ContractFactoryABI } from '$lib/contracts/ERC721Factory.json'
+import type { BrowserProvider, Eip1193Provider } from 'ethers'
 
 declare global {
   interface Window {
-    ethereum?: MetaMaskInpageProvider
+    ethereum: Eip1193Provider & BrowserProvider
   }
 }
 
-const getFactoryContract = async (
-  contractAddress: string
-): Promise<Contract> => {
-  let signer = null
-  let provider
-  if (!window.ethereum) {
-    throw new Error('Ethereum object not found, install MetaMask.')
-  }
-
-  provider = new ethers.BrowserProvider(window.ethereum)
-  signer = await provider.getSigner()
-
-  const contract = new ethers.Contract(
-    contractAddress,
-    ContractFactoryABI,
-    signer
-  )
-
-  return contract
-}
+export const FactoryAddress = '0xc9CCc8Cd69579596f376F339c31ED17A9dFd42f3'

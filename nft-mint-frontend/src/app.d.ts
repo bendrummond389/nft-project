@@ -6,6 +6,9 @@ declare global {
     // interface Locals {}
     // interface PageData {}
     // interface Platform {}
+    interface Window {
+      ethereum: Eip1193Provider & BrowserProvider
+    }
   }
 }
 

@@ -7,12 +7,14 @@ contract ERC721Factory {
   ERC721Token[] public deployedTokens;
 
   function createToken(string memory name, string memory symbol) public {
-    ERC721Token newToken = new ERC721Token(name, symbol);
+    ERC721Token newToken = new ERC721Token(name, symbol, msg.sender);
     deployedTokens.push(newToken);
   }
 
   function mintToken(uint256 index, address to, string memory uri) public {
     ERC721Token token = deployedTokens[index];
+
+    require(msg.sender == token.owner(), "Only the token owner can mint tokens");
     token.mint(to, uri);
   }
 
