@@ -30,8 +30,11 @@
         <Separator />
       </Card.Header>
       <Card.Content>
-        <a href="{`https://sepolia.etherscan.io/address/${token.tokenAddress}`}"
-          >See contract on Etherscan</a
+        <a
+          target="_blank"
+          class="bg-secondary rounded-sm p-2"
+          href="{`https://sepolia.etherscan.io/address/${token.tokenAddress}`}"
+          >View contract on Etherscan</a
         >
       </Card.Content>
     </Card.Root>
