@@ -9,6 +9,7 @@ contract ERC721Factory {
     string name;
     string symbol;
     string description;
+    address owner;
   }
 
   TokenMetadata[] public deployedTokens;
@@ -26,7 +27,7 @@ contract ERC721Factory {
     );
 
     deployedTokens.push(
-      TokenMetadata(address(newToken), _name, _symbol, _description)
+      TokenMetadata(address(newToken), _name, _symbol, _description, msg.sender)
     );
   }
 

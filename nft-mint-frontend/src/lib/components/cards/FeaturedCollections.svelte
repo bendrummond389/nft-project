@@ -1,31 +1,19 @@
 <script lang="ts">
   import * as Card from '$lib/components/ui/card'
   import { onMount } from 'svelte'
-  import { contract as factoryContract } from '$lib/stores/contract'
-  import { get } from 'svelte/store'
   import Separator from '../ui/separator/separator.svelte'
-  import type { ERC721Factory, ERC721Token } from '$lib/types'
+  import type { ERC721Factory } from '$lib/types'
+  import { fetchDeployedTokens } from '$lib/ethereum'
 
   let deployedTokens: ERC721Factory.TokenMetadataStruct[] = []
 
-  const fetchDeployedTokens = async () => {
-    const factory = get(factoryContract)
-
-    if (factory) {
-      try {
-        let tokens = await factory.getDeployedTokens()
-        // Create a copy of the array and then sort
-        deployedTokens = [...tokens]
-          .sort((a, b) => b.tokenAddress.localeCompare(a.tokenAddress))
-          .slice(0, 4)
-      } catch (error) {
-        console.error('Error fetching deployed tokens:', error)
-      }
-    }
+  const getDeployedTokens = async () => {
+    deployedTokens = await fetchDeployedTokens()
   }
 
   onMount(() => {
-    fetchDeployedTokens()
+    getDeployedTokens()
+    deployedTokens.slice(0, 4)
   })
 </script>
 
