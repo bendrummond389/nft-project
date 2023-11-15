@@ -5,6 +5,7 @@ import CollectionsCard from '$lib/components/cards/FeaturedCollections.svelte'
   import Separator from '$lib/components/ui/separator/separator.svelte'
 </script>
 
-<div class="m-3">
+<div class="p-5">
+  <h2 class="text-xl font-semibold mb-4">Featured Collections</h2>
   <FeaturedCollections />
 </div>

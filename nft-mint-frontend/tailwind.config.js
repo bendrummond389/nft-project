@@ -14,6 +14,9 @@ const config = {
       },
     },
     extend: {
+      animation: {
+        'spin-slow': 'spin 15s linear infinite',
+      },
       colors: {
         border: 'hsl(var(--border) / <alpha-value>)',
         input: 'hsl(var(--input) / <alpha-value>)',

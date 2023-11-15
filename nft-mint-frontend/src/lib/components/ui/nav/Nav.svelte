@@ -8,7 +8,7 @@
 
   const navItems = [
     { label: 'Home', href: '/' },
-    { label: 'Minting', href: '/minting', requiresWallet: true },
+    { label: 'About', href: '/about' },
     { label: 'Collections', href: '/collections', requiresWallet: true },
   ]
 </script>

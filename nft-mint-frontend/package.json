@@ -28,7 +28,7 @@
   "type": "module",
   "dependencies": {
     "@metamask/providers": "^14.0.0",
-    "bits-ui": "^0.9.4",
+    "bits-ui": "^0.9.7",
     "clsx": "^2.0.0",
     "dotenv": "^16.3.1",
     "ethers": "^6.8.1",

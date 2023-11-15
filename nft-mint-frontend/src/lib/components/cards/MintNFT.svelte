@@ -73,11 +73,11 @@
     </Card.Description>
     <Separator />
   </Card.Header>
-  <Card.Content>
+  <Card.Content class="text-left">
     <form>
       <div class="grid w-full gap-4">
         <div class="flex flex-col space-y-1.5">
-          <Label for="recipient_address">Recipient Address</Label>
+          <Label for="recipient_address" class="mb-2">Recipient Address</Label>
           <Input
             id="recipient_address"
             placeholder="Address"
@@ -85,7 +85,7 @@
           />
         </div>
         <div class="flex flex-col space-y-1.5">
-          <Label for="nft_name">NFT Name</Label>
+          <Label for="nft_name" class="mb-2">NFT Name</Label>
           <Input
             id="nft_name"
             placeholder="Name"
@@ -93,14 +93,14 @@
           />
         </div>
         <div class="flex flex-col space-y-1.5">
-          <Label for="nft_description">NFT Description</Label>
+          <Label for="nft_description" class="mb-2">NFT Description</Label>
           <Input
             id="nft_description"
             placeholder="Description"
             on:input="{handleDescriptionChange}"
           />
         </div>
-        <label for="imageInput">Select Image</label>
+        <Label for="imageInput" >Select Image</Label>
         <Input
           type="file"
           id="imageInput"

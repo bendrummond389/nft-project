@@ -48,9 +48,12 @@
       {/each}
     </div>
   </div>
-  <div class="mx-auto">
+  <div class="mx-auto text-center">
     {#if tokenContract}
       <MintNft contract="{tokenContract}" />
+      <a href="{`https://sepolia.etherscan.io/address/${collectionAddress}`}">
+        <h3 class="mt-2">View on Etherscan</h3>
+      </a>
     {/if}
   </div>
 </div>
