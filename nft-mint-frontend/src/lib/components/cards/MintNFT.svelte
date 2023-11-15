@@ -5,6 +5,7 @@
   import { Label } from '../ui/label'
   import { Input } from '../ui/input'
   import { Button } from '../ui/button'
+  export let contract: ERC721Token
 
   let imageFile: File | null = null
   let recipientAddress: string = ''
@@ -30,6 +31,8 @@
     nftDescription = (event.target as HTMLInputElement).value
   }
 
+  const handleSubmit = async () => {}
+
   const uploadImagetoPinata = async () => {
     if (!imageFile || !nftName || !nftDescription) {
       console.error('Please provide all required fields')
@@ -51,8 +54,11 @@
         throw new Error('Failed to upload image and metadata')
       }
       const result = await response.json()
-      console.log(result)
-      // Handle the successful response, e.g., minting the NFT
+      if (result.success) {
+        console.log(result.ipfsHash)
+        let contractResponse = await contract.mint(recipientAddress, result.ipfsHash)
+        console.log(contractResponse)
+      }
     } catch (error) {
       console.error('Error:', error)
     }

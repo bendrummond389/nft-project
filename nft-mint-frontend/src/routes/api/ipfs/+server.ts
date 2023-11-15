@@ -38,6 +38,7 @@ export async function POST(event) {
       }
 
       const pinataData: any = await pinataResponse.json()
+
       return json({ success: true, ipfsHash: pinataData.IpfsHash })
     } catch (error: any) {
       console.error('Error:', error)

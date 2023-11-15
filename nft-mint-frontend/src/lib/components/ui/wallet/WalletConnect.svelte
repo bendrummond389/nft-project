@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ethers } from 'ethers'
   import Button from '../button/button.svelte'
-  import { walletAddress } from '$lib/stores/wallet'
+  import { walletAddress, ethSigner, ethProvider } from '$lib/stores/wallet'
   import { onMount } from 'svelte'
 
   let loading: boolean = true
@@ -14,6 +14,7 @@
         })
         if (Array.isArray(accounts) && accounts.length > 0) {
           walletAddress.set(accounts[0])
+          createSigner()
         }
       } catch (error) {
         console.error('Error fetching accounts: ', error)
@@ -30,6 +31,7 @@
         })
         if (Array.isArray(accounts) && accounts.length > 0) {
           walletAddress.set(accounts[0])
+          createSigner()
         } else {
           console.error('No accounts returned by MetaMask')
         }
@@ -40,12 +42,18 @@
       alert('MetaMask not installed')
     }
   }
+
+  const createSigner = async () => {
+    const provider = new ethers.BrowserProvider(window.ethereum)
+    const signer = await provider.getSigner()
+    ethSigner.set(signer)
+  }
 </script>
 
 {#if loading}
   <span></span>
 {:else if $walletAddress}
-  <p class="text-orange-400">Connected to MetaMask</p>
+  <p class="text-primary/70">Connected to MetaMask</p>
 {:else}
   <Button on:click="{connectWallet}">Connect to MetaMask</Button>
 {/if}
