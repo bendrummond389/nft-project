@@ -11,7 +11,7 @@ declare global {
   }
 }
 
-export const FactoryAddress = '0x1432e5FD470429feB45B7CaD510CeB390fF9AbE1'
+export const FactoryAddress = '0xCeaE7A3A107415c18eAa4c1fdF30044C074D88eE'
 
 export const fetchDeployedTokens = async (): Promise<
   ERC721Factory.TokenMetadataStruct[]
@@ -23,8 +23,9 @@ export const fetchDeployedTokens = async (): Promise<
     try {
       let tokens = await factory.getDeployedTokens()
       // Create a copy of the array and then sort
-      deployedTokens = [...tokens]
-        .sort((a, b) => b.tokenAddress.localeCompare(a.tokenAddress))
+      deployedTokens = [...tokens].sort((a, b) =>
+        b.tokenAddress.localeCompare(a.tokenAddress)
+      )
     } catch (error) {
       console.error('Error fetching deployed tokens:', error)
     }

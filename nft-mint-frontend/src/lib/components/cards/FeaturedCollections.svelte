@@ -21,7 +21,11 @@
   {#each deployedTokens as token}
     <Card.Root class="w-1/4 m-2">
       <Card.Header>
-        <Card.Title>{token.name}</Card.Title>
+        <Card.Title>
+          <a class="text-2xl hover:text-primary/70" href="{`/collections/${token.tokenAddress}`}">
+            {token.name}
+          </a>
+        </Card.Title>
         <Card.Description>
           Symbol: {token.symbol}
           <br />

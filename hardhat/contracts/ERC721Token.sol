@@ -47,6 +47,14 @@ contract ERC721Token is ERC721, Ownable {
     _tokenURIs[tokenId] = _tokenURI;
   }
 
+  function getAllURIs() public view returns (string[] memory) {
+    string[] memory uris = new string[](_tokenIdCounter);
+    for (uint i = 1; i <= _tokenIdCounter; i++) {
+      uris[i - 1] = _tokenURIs[i];
+    }
+    return uris;
+  }
+
   function tokenURI(
     uint256 tokenId
   ) public view override returns (string memory) {

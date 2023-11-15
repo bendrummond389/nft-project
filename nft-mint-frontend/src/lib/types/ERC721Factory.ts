@@ -19,7 +19,7 @@ import type {
   TypedEventLog,
   TypedListener,
   TypedContractMethod,
-} from "../common";
+} from "./common";
 
 export declare namespace ERC721Factory {
   export type TokenMetadataStruct = {
