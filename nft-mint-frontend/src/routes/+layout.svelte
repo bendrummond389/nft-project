@@ -7,5 +7,6 @@
 
 <ModeWatcher />
 <EthereumSetup />
+
 <Nav />
 <slot />

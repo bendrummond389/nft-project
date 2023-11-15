@@ -65,7 +65,7 @@
   }
 </script>
 
-<Card.Root class="w-1/3">
+<Card.Root>
   <Card.Header>
     <Card.Title>Mint new NFT to this collection</Card.Title>
     <Card.Description>
