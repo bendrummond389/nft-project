@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Contract, ethers, type Provider } from 'ethers'
+  import { Contract, ethers, type AddressLike, type Provider } from 'ethers'
   import { onMount } from 'svelte'
   import { abi as ContractFactoryABI } from '$lib/contracts/ERC721Factory.json'
   import { contract } from '$lib/stores/contract'
@@ -15,11 +15,28 @@
       setupEthereumListeners()
       setProvider(provider)
       setContract(provider)
+
+      try {
+        const accounts = await window.ethereum.request({
+          method: 'eth_accounts',
+        })
+
+        if (accounts.length > 0) {
+          setWalletAddress(accounts[0])
+        }
+      } catch (error: any) {
+        console.error(error)
+      }
+      
     }
   })
 
   const setProvider = (provider: Provider) => {
     ethProvider.set(provider)
+  }
+
+  const setWalletAddress = (address: AddressLike) => {
+    walletAddress.set(address)
   }
 
   const setContract = (provider: Provider) => {
@@ -33,7 +50,7 @@
 
   const setupEthereumListeners = () => {
     window.ethereum.on('accountsChanged', (accounts) => {
-      walletAddress.set(accounts[0] || null)
+      setWalletAddress(accounts[0] || null)
     })
   }
 </script>

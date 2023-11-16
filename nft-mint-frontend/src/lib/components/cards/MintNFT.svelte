@@ -6,6 +6,7 @@
   import { Input } from '../ui/input'
   import { Button } from '../ui/button'
   export let contract: ERC721Token
+  export let disabled: boolean
 
   let imageFile: File | null = null
   let recipientAddress: string = ''
@@ -41,9 +42,9 @@
 
     const data = new FormData()
     data.append('file', imageFile)
-    data.append('name', nftName)
-    data.append('description', nftDescription)
-    data.append('recipient_address', recipientAddress)
+    // data.append('name', nftName)
+    // data.append('description', nftDescription)
+    // data.append('recipient_address', recipientAddress)
 
     try {
       const response = await fetch('/api/ipfs', {
@@ -56,7 +57,10 @@
       const result = await response.json()
       if (result.success) {
         console.log(result.ipfsHash)
-        let contractResponse = await contract.mint(recipientAddress, result.ipfsHash)
+        let contractResponse = await contract.mint(
+          recipientAddress,
+          result.ipfsHash
+        )
         console.log(contractResponse)
       }
     } catch (error) {
@@ -65,7 +69,7 @@
   }
 </script>
 
-<Card.Root>
+<Card.Root class="w-[400px] mx-5">
   <Card.Header>
     <Card.Title>Mint new NFT to this collection</Card.Title>
     <Card.Description>
@@ -82,6 +86,7 @@
             id="recipient_address"
             placeholder="Address"
             on:input="{handleAddressChange}"
+            disabled="{disabled}"
           />
         </div>
         <div class="flex flex-col space-y-1.5">
@@ -90,6 +95,7 @@
             id="nft_name"
             placeholder="Name"
             on:input="{handleNameChange}"
+            disabled="{disabled}"
           />
         </div>
         <div class="flex flex-col space-y-1.5">
@@ -98,14 +104,16 @@
             id="nft_description"
             placeholder="Description"
             on:input="{handleDescriptionChange}"
+            disabled="{disabled}"
           />
         </div>
-        <Label for="imageInput" >Select Image</Label>
+        <Label for="imageInput">Select Image</Label>
         <Input
           type="file"
           id="imageInput"
           accept="image/*"
           on:change="{handleFileChange}"
+          disabled="{disabled}"
         />
         <Button
           disabled="{!imageFile || !nftName || !nftDescription}"
