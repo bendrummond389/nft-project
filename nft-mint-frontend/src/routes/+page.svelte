@@ -1,5 +1,4 @@
 <script lang="ts">
-  import CollectionsCard from '$lib/components/cards/FeaturedCollections.svelte'
   import IntroText from '$lib/components/cards/IntroText.svelte'
   import { Button } from '$lib/components/ui/button'
   import HeroGraphic from '$lib/components/ui/heroGraphic/HeroGraphic.svelte'
