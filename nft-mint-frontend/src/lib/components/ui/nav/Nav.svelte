@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { walletAddress } from '$lib/stores/wallet'
   import Separator from '../separator/separator.svelte'
   import ThemeToggle from '../themeToggle/ThemeToggle.svelte'
@@ -11,12 +11,18 @@
     { label: 'About', href: '/about' },
     { label: 'Collections', href: '/collections', requiresWallet: true },
   ]
+
+  let showNavMenu: boolean = true
+
+  const toggleNavMenu = () => {
+    showNavMenu = !showNavMenu
+  }
 </script>
 
-<div class="flex flex-row items-center justify-between">
+<div class="flex flex-row items-center justify-between h-12 md:h-20">
   <div class="flex flex-row items-center">
     <Logo />
-    <div class="ml-5 flex flex-row">
+    <div class=" md:ml-5 flex flex-row">
       {#each navItems as item}
         <NavLink
           label="{item.label}"

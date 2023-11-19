@@ -9,7 +9,7 @@
 </script>
 
 <div class="flex flex-row w-full">
-  <Card.Root class="w-[400px] m-2">
+  <Card.Root class="w-[200px] md:w-[400px] m-2">
     <Card.Header>
       <Card.Title>
         <a
@@ -27,12 +27,13 @@
       <Separator />
     </Card.Header>
     <Card.Content>
-      <a
-        target="_blank"
-        class="bg-secondary rounded-sm p-2"
-        href="{`https://sepolia.etherscan.io/address/${token.tokenAddress}`}"
-        >View contract on Etherscan</a
-      >
+      <div class="bg-secondary rounded-sm p-2">
+        <a
+          target="_blank"
+          href="{`https://sepolia.etherscan.io/address/${token.tokenAddress}`}"
+          >View contract on Etherscan</a
+        >
+      </div>
     </Card.Content>
   </Card.Root>
 </div>

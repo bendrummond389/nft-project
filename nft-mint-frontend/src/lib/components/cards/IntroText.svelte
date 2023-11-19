@@ -6,9 +6,9 @@
 
 <Card.Root class=" mt-12">
   <Card.Header>
-    <Card.Title><h1 class="text-5xl">Welcome To Theta</h1></Card.Title>
+    <Card.Title><h1 class="text-3xl md:text-5xl">Welcome To Theta</h1></Card.Title>
     <Card.Description>
-      <h3 class="text-xl">
+      <h3 class="text-lg md:text-xl">
         Empowering Creators with Custom NFT Collections and Minting — Own Your
         Digital Universe
       </h3>
@@ -16,7 +16,7 @@
     <Separator />
   </Card.Header>
   <Card.Content>
-    <h1 class="text-3xl">FAQ</h1>
+    <h1 class="text-2xl md:text-3xl">FAQ</h1>
     <Accordion.Root>
       <Accordion.Item value="item-1">
         <Accordion.Trigger>What is Theta?</Accordion.Trigger>

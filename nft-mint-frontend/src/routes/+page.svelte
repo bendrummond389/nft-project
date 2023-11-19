@@ -8,9 +8,9 @@
 
 <div class="flex flex-col text-center items-center p-8">
   <HeroGraphic />
-  <div class="bg-card rounded-lg border p-6 w-fit justify-center mt-4">
-    <h1 class="text-5xl font-bold">Welcome to Theta</h1>
-    <h3 class="text-xl text-primary/50 mt-3">
+  <div class="bg-card rounded-lg border p-2 md:p-6 md:w-fit justify-center mt-4">
+    <h1 class="text-2xl md:text-5xl font-bold">Welcome to Theta</h1>
+    <h3 class="text-md md:text-xl text-primary/50 mt-3">
       Empowering Creators with Custom NFT Collections and Minting — Own Your
       Digital Universe
     </h3>

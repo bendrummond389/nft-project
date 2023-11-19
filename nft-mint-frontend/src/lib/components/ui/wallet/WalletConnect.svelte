@@ -3,6 +3,7 @@
   import Button from '../button/button.svelte'
   import { walletAddress, ethSigner, ethProvider } from '$lib/stores/wallet'
   import { onMount } from 'svelte'
+  import MetaMaskLogo from '../metamask/MetaMaskLogo.svelte'
 
   let loading: boolean = true
 
@@ -50,10 +51,10 @@
   }
 </script>
 
-{#if loading}
-  <span></span>
-{:else if $walletAddress}
-  <p class="text-primary/70">Connected to MetaMask</p>
-{:else}
-  <Button on:click="{connectWallet}">Connect to MetaMask</Button>
-{/if}
+  {#if loading}
+    <span></span>
+  {:else if $walletAddress}
+    <p class="text-primary/70"> <MetaMaskLogo /> </p>
+  {:else}
+    <Button variant="outline" class="" on:click="{connectWallet}"> <MetaMaskLogo /> </Button>
+  {/if}

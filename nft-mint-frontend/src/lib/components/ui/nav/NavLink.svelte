@@ -6,10 +6,10 @@
 
 {#if isEnabled}
   <a href="{href}">
-    <h4 class="scroll-m-20 m-3 text-xl font-normal tracking-tight">{label}</h4>
+    <h4 class="scroll-m-20 m-1 md:m-3 text-sm md:text-xl font-normal tracking-tight">{label}</h4>
   </a>
 {:else}
-  <h4 class="scroll-m-20 m-3 text-primary/30 text-xl font-normal tracking-tight">
+  <h4 class="scroll-m-20 m-1 md:m-3 text-primary/30 text-sm md:text-xl font-normal tracking-tight">
     {label}
   </h4>
 {/if}
